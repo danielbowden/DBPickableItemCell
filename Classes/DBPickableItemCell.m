@@ -11,6 +11,7 @@
 
 @interface DBPickableItemCell () <UIPickerViewDataSource, UIPickerViewDelegate, UIPopoverControllerDelegate>
 
+@property (nonatomic, copy) DBPickableItemSelectionBlock selectionBlock;
 @property (nonatomic, strong) UIPickerView *itemPicker;
 @property (nonatomic, strong) UITextField *hiddenTextField;
 @property (nonatomic, strong) id<DBPickableItem> currentlySelectedItem;
@@ -25,16 +26,17 @@
 
 - (void)dismissPicker
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(DBPickableItemCellDidSelectItem:)])
+    if (self.selectionBlock)
     {
-        [self.delegate DBPickableItemCellDidSelectItem:self.currentlySelectedItem];
+        self.selectionBlock(self.currentlySelectedItem);
     }
 }
 
-- (void)showPickableItems:(NSArray *)pickableItems currentlySelectedItem:(id<DBPickableItem>)selectedItem
+- (void)showPickableItems:(NSArray *)pickableItems currentlySelectedItem:(id<DBPickableItem>)selectedItem selectionBlock:(DBPickableItemSelectionBlock)selectionBlock
 {
     self.pickableItems = pickableItems;
     self.currentlySelectedItem = selectedItem;
+    self.selectionBlock = [selectionBlock copy];
     
     if (self.pickableItems.count > 1)
     {

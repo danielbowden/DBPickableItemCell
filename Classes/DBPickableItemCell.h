@@ -9,19 +9,10 @@
 
 #import "DBPickableItem.h"
 
-@protocol DBPickableItemCellDelegate;
-
 @interface DBPickableItemCell : UITableViewCell
 
-@property (nonatomic, weak) id<DBPickableItemCellDelegate> delegate;
+typedef void (^DBPickableItemSelectionBlock)(id<DBPickableItem> item);
 
-- (void)showPickableItems:(NSArray *)pickableItems currentlySelectedItem:(id<DBPickableItem>)selectedItem;
-
-@end
-
-@protocol DBPickableItemCellDelegate <NSObject>
-
-@required
-- (void)DBPickableItemCellDidSelectItem:(id<DBPickableItem>)item;
+- (void)showPickableItems:(NSArray *)pickableItems currentlySelectedItem:(id<DBPickableItem>)selectedItem selectionBlock:(DBPickableItemSelectionBlock)selectionBlock;
 
 @end
