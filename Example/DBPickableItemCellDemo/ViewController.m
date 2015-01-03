@@ -12,7 +12,7 @@
 #import "DBPickableItemCell.h"
 #import "Country.h"
 
-@interface ViewController () <UITableViewDataSource, UITableViewDelegate, DBPickableItemCellDelegate>
+@interface ViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *tableContent;
@@ -167,24 +167,6 @@
         }
     }
 }
-
-
-#pragma mark - DBPickableItemCellDelegate
-
-- (void)DBPickableItemCellDidSelectItem:(id<DBPickableItem>)item
-{
-    if ([item isMemberOfClass:[Person class]])
-    {
-        self.currentPerson = item;
-    }
-//    else if ([object isMemberOfClass:[ServiceInterval class]])
-//    {
-//        self.selectedService.selectedServiceInterval = object;
-//    }
-    
-    [self.tableView reloadData];
-}
-
 
 - (void)didReceiveMemoryWarning
 {
