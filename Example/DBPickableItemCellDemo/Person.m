@@ -10,16 +10,18 @@
 
 @implementation Person
 
-- (BOOL)isEqual:(id)object
+- (BOOL)isEqualToPickableItem:(id<DBPickableItem>)item
 {
-    if ([object isKindOfClass:[Person class]])
+    if (self == item)
     {
-        return ([self.pID compare:[object pID]] == NSOrderedSame);
+        return YES;
     }
-    else
+    else if ([item isKindOfClass:[Person class]])
     {
-        return NO;
+        return ([self.pID compare:[(Person *)item pID]] == NSOrderedSame);
     }
+
+    return NO;
 }
 
 - (NSString *)displayString

@@ -8,7 +8,7 @@
 @protocol DBPickableItem <NSObject>
 
 @required
-- (BOOL)isEqual:(id)object;
+- (BOOL)isEqualToPickableItem:(id<DBPickableItem>)item;
 
 @required
 - (NSString *)displayString;

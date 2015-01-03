@@ -10,16 +10,18 @@
 
 @implementation Country
 
-- (BOOL)isEqual:(id)object
+- (BOOL)isEqualToPickableItem:(id<DBPickableItem>)item
 {
-    if ([object isKindOfClass:[Country class]])
+    if (self == item)
     {
-        return [self.countryCode isEqualToString:[object countryCode]];
+        return YES;
     }
-    else
+    else if ([item isKindOfClass:[Country class]])
     {
-        return NO;
+        return [self.countryCode isEqualToString:[(Country *)item countryCode]];
     }
+    
+    return NO;
 }
 
 - (NSString *)displayString

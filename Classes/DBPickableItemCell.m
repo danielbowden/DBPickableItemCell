@@ -52,7 +52,14 @@
         
         NSInteger indexOfCurrentSelectedItem = [self.pickableItems indexOfObjectPassingTest:^BOOL(id<DBPickableItem> obj, NSUInteger idx, BOOL *stop) {
             
-            return [obj isEqual:weakSelf.currentlySelectedItem];
+            if ([obj respondsToSelector:@selector(isEqualToPickableItem:)])
+            {
+                return [obj isEqualToPickableItem:weakSelf.currentlySelectedItem];
+            }
+            else
+            {
+                return NO;
+            }
         }];
         
         if (indexOfCurrentSelectedItem != NSNotFound)
