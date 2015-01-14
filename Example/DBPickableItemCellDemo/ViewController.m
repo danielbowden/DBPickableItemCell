@@ -139,28 +139,28 @@
 {
     DBPickableItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DBPickableItemCellIdentifier" forIndexPath:indexPath];
     
+    __weak typeof(self)weakSelf = self;
+    
     switch (indexPath.section)
     {
         case 0:
         {
-            __weak typeof(self)weakSelf = self;
             [cell showPickableItems:self.people currentlySelectedItem:self.currentPerson selectionBlock:^(id<DBPickableItem> item) {
                 
                 weakSelf.currentPerson = item;
-                [weakSelf.tableView deselectRowAtIndexPath:indexPath animated:YES];
-                [weakSelf.tableView reloadData];
+                [tableView deselectRowAtIndexPath:indexPath animated:YES];
+                [tableView reloadData];
             }];
 
             break;
         }
         case 1:
         {
-            __weak typeof(self)weakSelf = self;
             [cell showPickableItems:self.countries currentlySelectedItem:self.currentCountry selectionBlock:^(id<DBPickableItem> item) {
                 
                 weakSelf.currentCountry = item;
-                [weakSelf.tableView deselectRowAtIndexPath:indexPath animated:YES];
-                [weakSelf.tableView reloadData];
+                [tableView deselectRowAtIndexPath:indexPath animated:YES];
+                [tableView reloadData];
             }];
 
             break;
